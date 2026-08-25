@@ -9,7 +9,7 @@ def cargarDatos():
     ruta_proyecto = os.path.dirname(ruta_actual)
     
     # 3. Construir la ruta completa al Excel
-    ruta_excel = os.path.join(ruta_proyecto, "./Base_de_datos.xlsx")
+    ruta_excel = os.path.join(ruta_proyecto, "Base_de_datos.xlsx")
 
     # 4. leemos los datos y los imprimimos
     df = pd.read_excel(ruta_excel)
