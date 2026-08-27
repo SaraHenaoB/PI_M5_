@@ -5,6 +5,7 @@ import pandas as pd
 import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
+import joblib
 
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
@@ -153,7 +154,18 @@ def main():
     
     # Desplegar los gráficos comparativos
     plot_comparisons(df_metrics)
+
+    # EXPORTACIÓN DE ARTEFACTOS PARA EL AVANCE 4
+
+    # Creamos el directorio models si no existe en la raíz
+    os.makedirs("models", exist_ok=True)
     
+    # Guardamos de forma física el modelo entrenado y el preprocesador
+    joblib.dump(best_model_object, "models/xgb_model.joblib")
+    joblib.dump(preprocessor, "models/preprocessor.joblib")
+    print("[MLOps INFO] Modelo campeón y Preprocesador exportados con éxito a la carpeta 'models/'")
+    # ==================================================================
+
     #mejor modelo y el preprocesador entrenado
     return best_model_object, preprocessor
 
