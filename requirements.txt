@@ -1,24 +1,24 @@
-# --- Manipulación y Análisis de Datos ---
+# --- Data manipulation and analysis ---
 pandas>=2.0.0
-openpyxl>=3.1.0        # Soporte nativo para lectura/escritura de logs en .xlsx (MONITOR_LOG)
+openpyxl>=3.1.0        # Native .xlsx log support
 
-# --- Computación Científica y Estadística (Pruebas de Drift) ---
+# --- Scientific computing and statistics ---
 numpy>=1.24.0
-scipy>=1.10.0          # Pruebas estadísticas distribucionales de Kolmogórov-Smirnov y Chi-cuadrado
+scipy>=1.10.0          # Distribution drift tests
 
-# --- Aprendizaje Automático y Modelado ---
+# --- Machine learning and modeling ---
 scikit-learn>=1.2.0
-xgboost>=1.7.0         # Modelo ganador seleccionado para producción
-lightgbm>=4.0.0        # Incluido para mantener la consistencia de la terna del Avance 2
-joblib>=1.2.0          # Indispensable para serializar/exportar el modelo (.joblib / .pkl)
+xgboost>=1.7.0         # Selected production model
+lightgbm>=4.0.0        # Additional model support
+joblib>=1.2.0          # Model serialization
 
-# --- Interfaz de Monitoreo y Gráficos ---
-streamlit>=1.25.0      # Motor web de la aplicación interactiva
+# --- Monitoring interface and charts ---
+streamlit>=1.25.0      # Interactive application
 matplotlib>=3.7.0
 seaborn>=0.12.0
 
-# --- Servidor de API e Infraestructura Backend (Inferencia) ---
-fastapi>=0.95.0        # Framework para la construcción de la API de predicción
-pydantic>=2.0.0        # Validación estricta de esquemas de datos para el cliente nuevo
-uvicorn>=0.22.0        # Servidor ASGI de producción para correr la API de FastAPI
-requests>=2.30.0       # Puente HTTP para comunicar el formulario web con el backend de inferencia
+# --- API server and backend infrastructure ---
+fastapi>=0.95.0        # API framework
+pydantic>=2.0.0        # Request validation
+uvicorn>=0.22.0        # ASGI server
+requests>=2.30.0       # HTTP client
