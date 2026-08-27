@@ -1,4 +1,7 @@
 # PI_M5_
+**Nota importante:** El avance 4 presenta erroes ya que hubo conflictos al inicializar docker aún habiendo hecho pruebas en 2 computadores distintos
+por lo que no se pudo resolver el contenerizado de la aplicación
+
 Proyecto Integrador: Sistema de Monitoreo de Datos e Inferencia de Riesgo Crediticio
 
 ## contexto
