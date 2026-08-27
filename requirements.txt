@@ -1,0 +1,24 @@
+# --- Manipulación y Análisis de Datos ---
+pandas>=2.0.0
+openpyxl>=3.1.0        # Soporte nativo para lectura/escritura de logs en .xlsx (MONITOR_LOG)
+
+# --- Computación Científica y Estadística (Pruebas de Drift) ---
+numpy>=1.24.0
+scipy>=1.10.0          # Pruebas estadísticas distribucionales de Kolmogórov-Smirnov y Chi-cuadrado
+
+# --- Aprendizaje Automático y Modelado ---
+scikit-learn>=1.2.0
+xgboost>=1.7.0         # Modelo ganador seleccionado para producción
+lightgbm>=4.0.0        # Incluido para mantener la consistencia de la terna del Avance 2
+joblib>=1.2.0          # Indispensable para serializar/exportar el modelo (.joblib / .pkl)
+
+# --- Interfaz de Monitoreo y Gráficos ---
+streamlit>=1.25.0      # Motor web de la aplicación interactiva
+matplotlib>=3.7.0
+seaborn>=0.12.0
+
+# --- Servidor de API e Infraestructura Backend (Inferencia) ---
+fastapi>=0.95.0        # Framework para la construcción de la API de predicción
+pydantic>=2.0.0        # Validación estricta de esquemas de datos para el cliente nuevo
+uvicorn>=0.22.0        # Servidor ASGI de producción para correr la API de FastAPI
+requests>=2.30.0       # Puente HTTP para comunicar el formulario web con el backend de inferencia
