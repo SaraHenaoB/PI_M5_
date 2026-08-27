@@ -1,22 +1,18 @@
 # Importar librerías
 import pandas as pd
 import numpy as np
-import seaborn as sns
 
 from sklearn.pipeline import Pipeline
 from sklearn.impute import SimpleImputer
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import StandardScaler, OneHotEncoder, OrdinalEncoder
-
-from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
-
-from sklearn.metrics import classification_report, confusion_matrix, roc_auc_score, accuracy_score
 
 from Cargar_datos import cargarDatos
 
 import warnings
 warnings.filterwarnings('ignore')
+
 
 def clean_data(df):
     """
@@ -56,8 +52,10 @@ def split_data(df):
 
     #Eliminamos las columnas objetivo y de fecha_prestamo (La info de fecha para este caso no aporta mucho al análisis ya que 
     # se desconoce el comportamientiento del dataset y solo serían especulaciones sin rigor)para evitar ruido en el entrenamiento
-    X = df.drop(columns=[target, "fecha_prestamo"], errors="ignore")   # features
-    y = df[target]                                                     # target
+    X = df_sorted.drop(
+         columns=[target, "fecha_prestamo","saldo_mora", "saldo_mora_codeudor", "saldo_total", "saldo_principal", "puntaje"],
+           errors="ignore")         # features
+    y = df_sorted[target]           # target
 
     #Tener en cuenta la tenporalidad. Shuffle = False
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, shuffle=False)
@@ -112,8 +110,20 @@ def ft_engineering_pipeline(df):
 
     #Separamos features y target
     target = "Pago_atiempo"
-    X = df.drop(columns=[target, "fecha_prestamo"], errors="ignore")        # features
-    y = df[target]                                                          # target
+    #PURGA DE VARIABLES: Eliminamos las columnas que causan la trampa del 1.0
+    columnas_fuga = [
+        target, 
+        "fecha_prestamo", 
+        "saldo_mora", 
+        "saldo_mora_codeudor", 
+        "saldo_total", 
+        "saldo_principal",
+        "puntaje" # se elimina la variable de mayor correlación ya que no está permitiendo predecir, 
+                    #probablemente sea calculada después de haber hecho el pago
+    ]
+    
+    X = df.drop(columns=[col for col in columnas_fuga if col in df.columns], errors="ignore")        #features
+    y = df[target]                                                                                   # target
 
     # 'promedio_ingresos_datacredito' se incluirá automáticamente aquí por ser float64
     numerical_features = X.select_dtypes(include=['int64', 'float64']).columns.tolist()
@@ -148,7 +158,7 @@ def main():
     df=cargarDatos()
     print(df)
 
-    #Ejecutar el pipeline inserter el codigo AQUIII
+    #Ejecutar el pipeline
     X_train, X_test, y_train, y_test, preprocessor = ft_engineering_pipeline (df)
 
     return X_train, X_test, y_train, y_test, preprocessor
